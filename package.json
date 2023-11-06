@@ -1,0 +1,15 @@
+{
+  "name": "az-store",
+  "version": "1.0.0",
+  "description": "AZ-Store",
+  "main": "index.js",
+  "scripts": {
+    "Watch": "npx tailwindcss -i ./css/style.css -o ./dist/style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}
