@@ -1,6 +1,6 @@
 <div class="divform mx-40 my-10">
 
-   <form  method="POST" action="./data/customers.json"  class="form flex flex-col  flex-wrap w-80"> <!-- onsubmit="validateForm(event) -->
+   <form  method="POST" action="./data/customers.json"  class="form flex flex-col  flex-wrap w-80" onsubmit="return validateForm(event)">
 
     <img src="../asset/img/hackers-poulette-logo.png" alt="logo" class="log objet-center object-cover h-96 w-96">
 
@@ -164,4 +164,22 @@
   }
     ?>
   
+  
 
+  <div class="divform mx-40 my-10">
+
+<form method="POST" action="./data/customers.json" class="form flex flex-col flex-wrap w-80" onsubmit="return validateForm(event)">
+
+ <!-- ... (other form fields) ... -->
+
+ <div id="nameError" class="error" aria-live="polite"></div><br>
+
+ <label class="text-customwhite" for="lastname">Lastname:</label>
+ <input class="text-customgray" type="text" id="lastname" name="lastname" required aria-describedby="lastnameError">
+ <div id="lastnameError" class="error" aria-live="polite"></div><br>
+
+ <!-- ... (other form fields) ... -->
+
+ <input class="bg-customindigo text-customwhite mx-10" type="submit" value="submit">
+</form>
+</div>

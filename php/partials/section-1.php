@@ -93,96 +93,133 @@
   </form>
 </div>
 
-<!-- <script>
-    function validateForm(event) {
-        event.preventDefault(); 
-        let name = document.getElementById('name').value.trim();
-        let lastname = document.getElementById('lastname').value.trim();
-        let gender = document.querySelector('input[name="gender"]:checked');
-        let country = document.getElementById('country').value.trim();
-        let email = document.getElementById('email').value.trim();
-        let message = document.getElementById('message').value.trim();
 
-        let nameError = document.getElementById('nameError');
-        let lastnameError = document.getElementById('lastnameError');
-        let genderError = document.getElementById('genderError');
-        let countryError = document.getElementById('countryError');
-        let emailError = document.getElementById('emailError');
-        let messageError = document.getElementById('messageError');
+<script>
 
-        nameError.textContent = !name ? 'Please enter a name.' : '';
-        lastnameError.textContent = !lastname ? 'Please enter a lastname.' : '';
-        genderError.textContent = !gender ? 'Please select a gender.' : '';
-        countryError.textContent = !country ? 'Please enter a country.' : '';
-        emailError.textContent = !email ? 'Please enter an email address.' : '';
-        emailError.textContent += !email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? ' Please enter a valid email address.' : '';
-        messageError.textContent = !message ? 'Please enter a message.' : '';
+function validateName() {
+    const name = document.getElementById('name').value.trim();
+    const nameError = document.getElementById('nameError');
+    nameError.textContent = !name ? 'Please enter a name.' : '';
+    return !!name;
+}
 
-        if (name || lastname || !gender || country || email || !message) {
-            return false;
-        }
+function validateLastName() {
+    const lastname = document.getElementById('lastname').value.trim();
+    const lastnameError = document.getElementById('lastnameError');
+    lastnameError.textContent = !lastname ? 'Please enter a lastname.' : '';
+    return !!lastname;
+}
 
+function validateGender() {
+    const gender = document.getElementById('gender').value.trim();
+    const genderError = document.getElementById('genderError');
+    genderError.textContent = !gender ? 'Please enter a gender.' : '';
+    return !!gender;
+}
+
+function validateCountry() {
+    const country = document.getElementById('country').value.trim();
+    const countryError = document.getElementById('countryError');
+    countryError.textContent = !country ? 'Please enter a country.' : '';
+    return !!country;
+}
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function validateMessage() {
+    const message = document.getElementById('message').value.trim();
+    const messageError = document.getElementById('messageError');
+    messageError.textContent = !message ? 'Please enter a message.' : '';
+    return !!message;
+}
+
+
+function validateForm(event) {
+    event.preventDefault();
+
+    const isValidName = validateName();
+    const isValidLastName = validateLastName();
+    const isValidGender = validateGender();
+    const isValidCountry = validateCountry();
+    const isValidMessage = validateMessage();
+
+    const email = document.getElementById('email').value.trim();
+    const isValidEmail = validateEmail(email);
+    const emailError = document.getElementById('emailError');
+    emailError.textContent = !email ? 'Please enter an email address.' : (!isValidEmail ? 'Please enter a valid email address.' : '');
+
+    // Rassembler toutes les erreurs pour affichage
+    const errors = [isValidName, isValidLastName, isValidEmail, isValidGender, isValidCountry, isValidMessage];
+
+    const errorField = document.getElementById('messageError');
+    errorField.textContent = errors.filter(error => !error).map(message => message).join(' ');
+
+    if (errors.every(error => error)) {
         event.target.submit();
     }
-</script> -->
+}
+</script>
 
 
     <?php
   
-  // function validateName($name) {
-  //   $errorMessage = "Please enter a name.";
-  //   if (empty($name)) {
-  //     echo "<script>alert('$errorMessage');</script>";
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  function validateName($name) {
+    $errorMessage = "Please enter a name.";
+    if (empty($name)) {
+      echo "<script>alert('$errorMessage');</script>";
+      return false;
+    }
+    return true;
+  }
 
-  // function validateLastName($lastname) {
-  //   $errorMessage = "Please enter a lastname.";
-  //   if (empty($lastname)) {
-  //     echo "<script>alert('$errorMessage');</script>";
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  function validateLastName($lastname) {
+    $errorMessage = "Please enter a lastname.";
+    if (empty($lastname)) {
+      echo "<script>alert('$errorMessage');</script>";
+      return false;
+    }
+    return true;
+  }
 
-  // function validateCountry($country) {
-  //   $errorMessage = "Please enter a country.";
-  //   if (empty($country)) {
-  //       echo "<script>alert('$errorMessage');</script>";
-  //       return false;
-  //     }
-  //     return true;
-  //   }
+  function validateCountry($country) {
+    $errorMessage = "Please enter a country.";
+    if (empty($country)) {
+        echo "<script>alert('$errorMessage');</script>";
+        return false;
+      }
+      return true;
+    }
 
-  // function validateEmail($email) {
-  //   $errorMessage = "Please enter a valid email address.";
+  function validateEmail($email) {
+    $errorMessage = "Please enter a valid email address.";
     
-  //   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  //     echo "<script>alert('$errorMessage');</script>";
-  //     return false;
-  //   }        
-  //   return true;
-  // }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      echo "<script>alert('$errorMessage');</script>";
+      return false;
+    }        
+    return true;
+  }
 
-  // function validateSubject($subject) {
-  //   $errorMessage = "Please select a subject.";
-  //   if ($subject === 'subject0') {
-  //     echo "<script>alert('$errorMessage');</script>";
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  function validateSubject($subject) {
+    $errorMessage = "Please select a subject.";
+    if ($subject === 'subject0') {
+      echo "<script>alert('$errorMessage');</script>";
+      return false;
+    }
+    return true;
+  }
 
-  // function validateMessage($message) {
-  //   $errorMessage = "Please enter a message.";
-  //   if (empty($message)) {
-  //     echo "<script>alert('$errorMessage');</script>";
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  function validateMessage($message) {
+    $errorMessage = "Please enter a message.";
+    if (empty($message)) {
+      echo "<script>alert('$errorMessage');</script>";
+      return false;
+    }
+    return true;
+  }
 
     
       if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Submit"])) {
