@@ -1,7 +1,7 @@
 {
-  "name": "az-store",
+  "name": "poulette",
   "version": "1.0.0",
-  "description": "AZ-Store",
+  "description": "Hackers-poulette",
   "main": "index.js",
   "scripts": {
     "Watch": "npx tailwindcss -i ./css/style.css -o ./dist/style.css --watch"
