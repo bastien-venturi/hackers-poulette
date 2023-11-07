@@ -7,18 +7,16 @@
     <div class="grid grid-cols-2 content-center text-center">
 
     <label class="text-customwhite" for="name">Name:</label>
-    <input class="text-customgray" type="text" id="name" name="name" pattern=".*" aria-describedby="nameError" aria-invalid="true">
-    <p id="nameError" role="alert">Please enter a name.</p><br>
-
-    <!-- <div id="nameError" class="error" aria-live="polite">
+    <input class="text-customgray" type="text" id="name" name="name" required aria-describedby="nameError">
+    <div id="nameError" class="error" aria-live="polite">
       <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Submit"]) && empty($name)) {
         echo "Please enter a name.";
       } ?>
-    </div><br> -->
+    </div><br>
 
     <label class="text-customwhite " for="lastname">Lastname:</label>
-    <input class="text-customgray " type="text" id="lastname" name="lastname" required aria-describedby="nameError">
-    <div id="nameError" class="error" aria-live="polite">
+    <input class="text-customgray " type="text" id="lastname" name="lastname" required aria-describedby="lastnameError">
+    <div id="lastnameError" class="error" aria-live="polite">
       <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Submit"]) && empty($lastname)) {
         echo "Please enter a lastname.";
       } ?>
@@ -47,8 +45,8 @@
     </div><br>
 
     <label class="text-customwhite" for="country">Country:</label>
-    <input class="text-customgray" type="text" id="country" name="country" required aria-describedby="nameError">
-    <div id="nameError" class="error" aria-live="polite">
+    <input class="text-customgray" type="text" id="country" name="country" required aria-describedby="countryError">
+    <div id="countryError" class="error" aria-live="polite">
       <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Submit"]) && empty($country)) {
         echo "Please enter a country.";
       } ?>
@@ -78,9 +76,9 @@
     </div>
 
     <label class="text-customwhite" for="message">Message:</label>
-    <textarea class="text-customgray h-20" id="message" name="message" required aria-describedby="nameError"></textarea><br>
+    <textarea class="text-customgray h-20" id="message" name="message" required aria-describedby="messageError"></textarea><br>
     
-    <div id="nameError" class="error" aria-live="assertive">
+    <div id="messageError" class="error" aria-live="assertive">
         <?php 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = $_POST['message'];
@@ -131,7 +129,61 @@
 
     <?php
   
-     
+  // function validateName($name) {
+  //   $errorMessage = "Please enter a name.";
+  //   if (empty($name)) {
+  //     echo "<script>alert('$errorMessage');</script>";
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  // function validateLastName($lastname) {
+  //   $errorMessage = "Please enter a lastname.";
+  //   if (empty($lastname)) {
+  //     echo "<script>alert('$errorMessage');</script>";
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  // function validateCountry($country) {
+  //   $errorMessage = "Please enter a country.";
+  //   if (empty($country)) {
+  //       echo "<script>alert('$errorMessage');</script>";
+  //       return false;
+  //     }
+  //     return true;
+  //   }
+
+  // function validateEmail($email) {
+  //   $errorMessage = "Please enter a valid email address.";
+    
+  //   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  //     echo "<script>alert('$errorMessage');</script>";
+  //     return false;
+  //   }        
+  //   return true;
+  // }
+
+  // function validateSubject($subject) {
+  //   $errorMessage = "Please select a subject.";
+  //   if ($subject === 'subject0') {
+  //     echo "<script>alert('$errorMessage');</script>";
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  // function validateMessage($message) {
+  //   $errorMessage = "Please enter a message.";
+  //   if (empty($message)) {
+  //     echo "<script>alert('$errorMessage');</script>";
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
     
       if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Submit"])) {
         $name = isset($_POST["name"]) ? $_POST["name"] : "";
@@ -164,4 +216,3 @@
   }
     ?>
   
-

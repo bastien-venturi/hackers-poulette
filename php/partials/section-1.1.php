@@ -7,7 +7,7 @@
     <div class="grid grid-cols-2 content-center text-center">
 
     <label class="text-customwhite" for="name">Name:</label>
-    <input class="text-customgray" type="text" id="name" name="name" pattern=".*" aria-describedby="nameError" aria-invalid="true">
+    <input class="text-customgray" type="text" id="name" name="name" aria-describedby="nameError" aria-invalid="true">
     <p id="nameError" role="alert">Please enter a name.</p><br>
 
     <!-- <div id="nameError" class="error" aria-live="polite">
