@@ -1,6 +1,6 @@
 <div class="divform mx-40 my-10">
 
-   <form  method="POST" action="./data/customers.json"  class="form flex flex-col  flex-wrap w-80"> <!-- onsubmit="validateForm(event) -->
+   <form  method="POST" action="./data/customers.json"  class="form flex flex-col  flex-wrap w-80" onsubmit="return validateForm(event)">
 
     <img src="../asset/img/hackers-poulette-logo.png" alt="logo" class="log objet-center object-cover h-96 w-96">
 
@@ -221,8 +221,24 @@ function validateForm(event) {
     return true;
   }
 
-    
-      if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Submit"])) {
+  function validateForm($name, $lastname, $country, $email, $subject, $message) {
+    $isValidName = validateName($name);
+    $isValidLastName = validateLastName($lastname);
+    $isValidCountry = validateCountry($country);
+    $isValidEmail = validateEmail($email);
+    $isValidSubject = validateSubject($subject);
+    $isValidMessage = validateMessage($message);
+
+    $customersArray = [$isValidName, $isValidLastName, $isValidCountry, $isValidEmail, $isValidSubject, $isValidMessage];
+
+    if ($errors === true) {
+      return true;
+    }
+    return false;
+  }
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Submit"])) {
+    validateForm($name, $lastname, $country, $email, $subject, $message);
         $name = isset($_POST["name"]) ? $_POST["name"] : "";
         $lastname = isset($_POST["lastname"]) ? $_POST["lastname"] : "";
         $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
@@ -231,25 +247,27 @@ function validateForm(event) {
         $subject = isset($_POST["subject"]) ? $_POST["subject"] : "";
         $message = isset($_POST["message"]) ? $_POST["message"] : "";      
       
-        $formdata = array(
-            'name' => $name,
-            'lastname' => $lastname,
-            'gender' => $gender,
-            'country' => $country,
-            'email' => $email,
-            'subject' => $subject,
-            'message' => $message
-        );
+    $formdata = array(
+        'name' => $name,
+        'lastname' => $lastname,
+        'gender' => $gender,
+        'country' => $country,
+        'email' => $email,
+        'subject' => $subject,
+        'message' => $message
+    );
 
-        $customers = file_get_contents('customers.json');
-        $customersArray = json_decode($customers, true);
-        
-        $customersArray[] = $formdata;
+    $customers = file_get_contents('customers.json');
+    $customersArray = json_decode($customers, true);
     
-        file_put_contents('customers.json', json_encode($customersArray));
-    
-        echo "<script>alert('Thank you for your message.');</script>";
-    
+    $customersArray[] = $formdata;
+
+    file_put_contents('customers.json', json_encode($customersArray));
+
+    echo "<script>alert('Thank you for your message.');</script>";
+
   }
-    ?>
+    
+  
+?>
   
